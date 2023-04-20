@@ -22,7 +22,7 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private Long id;
 
     @NotEmpty(message = "Name is required")
     private String userName;

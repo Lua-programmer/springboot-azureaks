@@ -27,21 +27,21 @@ public class UserService {
 
     public UserModel creatUserModel(UserDto userDto) {
         UserModel userModel = UserModel.builder()
-                .userName(userDto.getUsername())
+                .userName(userDto.getUserName())
                 .userEmail(userDto.getUserEmail())
                 .build();
         return userRepository.save(userModel);
     }
 
-    public UserModel updatUser(Long userId, UserDto userDto) {
+    public UserModel updateUser(Long userId, UserDto userDto) {
         UserModel userModel = getUser(userId);
-        userModel.setUserName(userDto.getUsername());
+        userModel.setUserName(userDto.getUserName());
         userModel.setUserEmail(userDto.getUserEmail());
         return userRepository.save(userModel);
     }
 
     public void deleteUser(Long userId) {
         getUser(userId);
-        userRepository.deleteByUserId(userId);
+        userRepository.deleteById(userId);
     }
 }

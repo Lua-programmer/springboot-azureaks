@@ -4,8 +4,4 @@ import org.springframework.data.repository.CrudRepository;
 
 import io.github.luaprogrammer.springboot.model.UserModel;
 
-public interface UserRepository extends CrudRepository<UserModel, Long> {
-
-    void deleteByUserId(Long userId);
-    
-}
+public interface UserRepository extends CrudRepository<UserModel, Long> {}
