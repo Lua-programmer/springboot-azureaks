@@ -1,5 +1,7 @@
 package io.github.luaprogrammer.springboot.controller;
 
+import io.github.luaprogrammer.springboot.controller.request.UserRequest;
+import io.github.luaprogrammer.springboot.controller.response.UserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,11 +12,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import io.github.luaprogrammer.springboot.dto.UserDto;
-import io.github.luaprogrammer.springboot.model.UserModel;
 import io.github.luaprogrammer.springboot.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,24 +26,24 @@ public class UserController {
     private final UserService userService;
     
     @GetMapping
-    public ResponseEntity<Iterable<UserModel>> getUsers() {
+    public ResponseEntity<List<UserResponse>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserModel> getUsersById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> getUsersById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUser(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserModel> createUser(@RequestBody @Valid UserDto UserDto) {
-        userService.creatUserModel(UserDto);
+    public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRequest userRequest) {
+        userService.creatUserModel(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserModel> updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto) {
-        userService.updateUser(id, userDto);
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody @Valid UserRequest userRequest) {
+        userService.updateUser(id, userRequest);
         return ResponseEntity.noContent().build();
     }   
 
